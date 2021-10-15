@@ -1,0 +1,3 @@
+{"level":"debug","x-b3-traceid":"2651d177aca89369","service":"micro.service","version":"v1.10.0-rc.34","rpc":"/micro.service/Create","message":"auth: skipping auth"}
+{"level":"debug","x-b3-traceid":"2651d177aca89369","service":"micro.service","version":"v1.10.0-rc.34","rpc":"/micro.service/Read","response":{"last_sync_time":{"seconds":1634289869,"nanos":269653793}}}
+{"level":"debug","x-b3-traceid":"2651d177aca89369","service":"micro.service","version":"v1.10.0-rc.34","rpc":"/micro.service/Update","request":{"last_updated_time":{"seconds":1634289869,"nanos":269653793}}}
