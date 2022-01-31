@@ -37,6 +37,9 @@ github.com/spf13/viper/internal/encoding/toml
 github.com/spf13/viper/internal/encoding/yaml
 # github.com/subosito/gotenv v1.2.0
 github.com/subosito/gotenv
+# github.com/yalp/jsonpath v0.0.0-20180802001716-5cc68e5049a0
+## explicit
+github.com/yalp/jsonpath
 # golang.org/x/sys v0.0.0-20210823070655-63515b42dcdf
 golang.org/x/sys/internal/unsafeheader
 golang.org/x/sys/unix

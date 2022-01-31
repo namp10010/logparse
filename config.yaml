@@ -1,11 +1,13 @@
 fields:
-  - "level"
-  - "x-b3-traceid"
-  - "service"
-  - "rpc"
-  - "message"
-  - "request"
-  - "response"
+  - "$.level"
+  - "$.x-b3-traceid"
+  - "$.trace_id"
+  - "$.rpc"
+  - "$.message"
+  - "$.body"
+jsonFields:
+  - "$.attributes.request"
+  - "$.attributes.response"
 skips:
   - "request authenticated and authorized successfully"
   - "auth: skipping auth"

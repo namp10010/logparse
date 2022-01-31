@@ -2,8 +2,10 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/json"
 	"fmt"
+	"github.com/yalp/jsonpath"
 	"os"
 	"strings"
 )
@@ -23,8 +25,8 @@ func main() {
 }
 
 func printLine(line []byte, config *Config) {
-	var m map[string]interface{}
-	if err := json.Unmarshal(line, &m); err != nil {
+	var logline interface{}
+	if err := json.Unmarshal(line, &logline); err != nil {
 		fmt.Printf("logparse: %s\n", err)
 		return
 	}
@@ -38,20 +40,30 @@ func printLine(line []byte, config *Config) {
 		}
 	}
 
-	// print
+	// format
 	var s string
 	for _, f := range config.Fields {
-		if v, ok := m[f]; !ok {
+		js, err := jsonpath.Read(logline, f)
+		if err != nil {
 			continue
-		} else {
-			// can improve with width
-			js,err := json.Marshal(v)
-			if err != nil {
-				fmt.Printf("logparse: %s\n", err)
-				continue
-			}
-			s = fmt.Sprintf("%s %s", s, js)
 		}
+		s = fmt.Sprintf("%s %s", s, js)
+	}
+	for _, f := range config.JsonFields {
+		js, err := jsonpath.Read(logline, f)
+		if err != nil {
+			continue
+		}
+
+		b, err := json.Marshal(js)
+		if err == nil {
+			var prettyJSON bytes.Buffer
+			if err := json.Indent(&prettyJSON, b, "", "  "); err == nil {
+				js = prettyJSON.String()
+			}
+		}
+
+		s = fmt.Sprintf("%s %s", s, js)
 	}
 	fmt.Println(s)
 }
