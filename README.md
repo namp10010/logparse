@@ -4,8 +4,10 @@ a no-brainer json log parser
 ### install
 
 ```bash
-  go install https://github.com/namp10010/logparse
+  go install github.com/namp10010/logparse
 ```
+
+copy the `config.yaml` to `~/.logparse`
 
 ### usage
 
