@@ -1,10 +1,7 @@
 fields:
   - "$.level"
-  - "$.x-b3-traceid"
-  - "$.trace_id"
-  - "$.rpc"
-  - "$.message"
-  - "$.body"
+  - "$.ts"
+  - "$.msg"
 jsonFields:
   - "$.attributes.request"
   - "$.attributes.response"

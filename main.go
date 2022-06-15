@@ -27,7 +27,7 @@ func main() {
 func printLine(line []byte, config *Config) {
 	var logline interface{}
 	if err := json.Unmarshal(line, &logline); err != nil {
-		fmt.Printf("logparse: %s\n", err)
+		fmt.Println(string(line))
 		return
 	}
 
@@ -44,7 +44,7 @@ func printLine(line []byte, config *Config) {
 	var s string
 	for _, f := range config.Fields {
 		js, err := jsonpath.Read(logline, f)
-		if err != nil {
+		if err != nil || js == "" {
 			continue
 		}
 		s = fmt.Sprintf("%s %s", s, js)
@@ -65,6 +65,7 @@ func printLine(line []byte, config *Config) {
 
 		s = fmt.Sprintf("%s %s", s, js)
 	}
+	s = strings.TrimLeft(s, " ")
 	fmt.Println(s)
 }
 

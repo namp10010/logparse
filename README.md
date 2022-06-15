@@ -14,3 +14,7 @@ copy the `config.yaml` to `~/.logparse`
 ```bash
   echo '{"message":"hello"}' | logparse
 ```
+
+### todo
+
+* make the config into args and more easy to use, remove the config file
