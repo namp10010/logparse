@@ -17,4 +17,9 @@ copy the `config.yaml` to `~/.logparse`
 
 ### todo
 
-* make the config into args and more easy to use, remove the config file
+* make the config into args and easier to use, remove the config file
+* enable color output
+  * RED - error
+  * YELLOW - warn
+  * GREEN - info
+  * DEBUG - blue
