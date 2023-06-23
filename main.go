@@ -7,8 +7,35 @@ import (
 	"fmt"
 	"github.com/yalp/jsonpath"
 	"os"
+	"runtime"
 	"strings"
 )
+
+var Reset = "\033[0m"
+var Red = "\033[31m"
+var Green = "\033[32m"
+var Yellow = "\033[33m"
+var Blue = "\033[34m"
+var Purple = "\033[35m"
+
+// var Cyan = "\033[36m"
+var Gray = "\033[37m"
+
+//var White = "\033[97m"
+
+func init() {
+	if runtime.GOOS == "windows" {
+		Reset = ""
+		Red = ""
+		Green = ""
+		Yellow = ""
+		Blue = ""
+		Purple = ""
+		//Cyan = ""
+		Gray = ""
+		//White = ""
+	}
+}
 
 func main() {
 	config, err := LoadConfig()
@@ -49,6 +76,7 @@ func printLine(line []byte, config *Config) {
 		}
 		s = fmt.Sprintf("%s %s", s, js)
 	}
+
 	for _, f := range config.JsonFields {
 		js, err := jsonpath.Read(logline, f)
 		if err != nil {
@@ -66,7 +94,31 @@ func printLine(line []byte, config *Config) {
 		s = fmt.Sprintf("%s %s", s, js)
 	}
 	s = strings.TrimLeft(s, " ")
+
+	// color
+	if config.Color {
+		level, _ := jsonpath.Read(logline, "$.level")
+		s = colorize(fmt.Sprintf("%s", level), s)
+	}
+
 	fmt.Println(s)
+}
+
+func colorize(level string, line string) string {
+	switch strings.ToUpper(level) {
+	case "INFO":
+		return fmt.Sprintf("%s%s%s", Green, line, Reset)
+	case "WARN":
+		return fmt.Sprintf("%s%s%s", Yellow, line, Reset)
+	case "ERROR":
+		return fmt.Sprintf("%s%s%s", Red, line, Reset)
+	case "DEBUG":
+		return fmt.Sprintf("%s%s%s", Blue, line, Reset)
+	case "TRACE":
+		return fmt.Sprintf("%s%s%s", Purple, line, Reset)
+	default:
+		return fmt.Sprintf("%s%s%s", Gray, line, Reset)
+	}
 }
 
 func exit(err error, code int) {

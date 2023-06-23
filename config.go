@@ -11,9 +11,10 @@ import (
 
 // Config defines configuration
 type Config struct {
-	Fields     []string `yaml:"fields" mapstructure:"fields"`
-	Skips      []string `yaml:"skips"  mapstructure:"skips"`
-	JsonFields []string `yaml:"jsonFields"  mapstructure:"jsonFields"`
+	Fields     []string `yaml:"fields" mapstructure:"fields"`          // Fields to print
+	Skips      []string `yaml:"skips"  mapstructure:"skips"`           // Fields to skip
+	JsonFields []string `yaml:"jsonFields"  mapstructure:"jsonFields"` // Fields to print in JSON format
+	Color      bool     `yaml:"color"  mapstructure:"color"`           // Enable color
 }
 
 // LoadConfig loads configuration from file, env and flags and return compiled and validated config

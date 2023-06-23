@@ -15,11 +15,14 @@ copy the `config.yaml` to `~/.logparse`
   echo '{"message":"hello"}' | logparse
 ```
 
-### todo
+### color output
 
+to enable color set this config
+```yaml
+  color: true
+```
+
+color setting can be found in [main.go](main.go)
+
+### todo
 * make the config into args and easier to use, remove the config file
-* enable color output
-  * RED - error
-  * YELLOW - warn
-  * GREEN - info
-  * DEBUG - blue

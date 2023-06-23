@@ -8,3 +8,4 @@ jsonFields:
 skips:
   - "request authenticated and authorized successfully"
   - "auth: skipping auth"
+color: true
