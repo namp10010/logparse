@@ -24,5 +24,11 @@ to enable color set this config
 
 color setting can be found in [main.go](main.go)
 
+### test
+
+```bash
+cat test.log | go run .
+```
+
 ### todo
 * make the config into args and easier to use, remove the config file

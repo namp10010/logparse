@@ -54,6 +54,10 @@ func main() {
 }
 
 func printLine(line []byte, config *Config) {
+	if strings.TrimSpace(string(line)) == "" {
+		return
+	}
+
 	var logline interface{}
 	if err := json.Unmarshal(line, &logline); err != nil {
 		fmt.Println(string(line))
